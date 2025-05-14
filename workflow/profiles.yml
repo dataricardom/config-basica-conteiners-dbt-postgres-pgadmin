@@ -1,0 +1,12 @@
+workflow:
+  target: dev
+  outputs:
+    dev:
+      type: postgres
+      host: db
+      user: postgres
+      password: postgres
+      port: 5432
+      dbname: northwind
+      schema: public
+      threads: 4
