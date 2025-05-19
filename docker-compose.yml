@@ -16,13 +16,13 @@ services:
     ports:
       - 55432:5432
     networks:
-      - rede
+      - nome-sua-rede
 
   pgadmin:
     container_name: pgadmin
     image: dpage/pgadmin4
     environment:
-      PGADMIN_DEFAULT_EMAIL: pgadmin4@pgadmin.org
+      PGADMIN_DEFAULT_EMAIL: seu-email@pgadmin.org
       PGADMIN_DEFAULT_PASSWORD: postgres
       PGADMIN_LISTEN_PORT: 5050
       PGADMIN_CONFIG_SERVER_MODE: 'False'
@@ -34,7 +34,7 @@ services:
     ports:
       - 5050:5050
     networks:
-      - rede
+      - nome-sua-rede
 
   dbt:
     build: .
@@ -45,7 +45,7 @@ services:
     ports:
       - "8080:8080"
     networks:
-      - rede
+      - nome-sua-rede
     depends_on:
       - db
     tty: true
@@ -63,5 +63,5 @@ volumes:
     driver: local
 
 networks:
-  rede:
+  nome-sua-rede:
     driver: bridge
