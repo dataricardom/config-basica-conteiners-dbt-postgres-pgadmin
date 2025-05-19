@@ -4,14 +4,14 @@ services:
   db:
     container_name: db
     image: postgres:latest
-    environment:
+    environment: # Configuração do banco.
       POSTGRES_DB: northwind
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
     volumes:
-      - postgresql_bin:/usr/lib/postgresql
-      - postgresql_data:/var/lib/postgresql/data
-      - ./northwind.sql:/docker-entrypoint-initdb.d/northwind.sql
+      - postgresql_bin:/usr/lib/postgresql #Caminho dos arquivos bin no volume.
+      - postgresql_data:/var/lib/postgresql/data #Caminho dos dados no volume.
+      - ./northwind.sql:/docker-entrypoint-initdb.d/northwind.sql # Cria tabelas e adiciona os dados do banco northwind.
       - ./files:/files
     ports:
       - 55432:5432
@@ -21,7 +21,7 @@ services:
   pgadmin:
     container_name: pgadmin
     image: dpage/pgadmin4
-    environment:
+    environment: #Configurações de acesso pgadmin.
       PGADMIN_DEFAULT_EMAIL: seu-email@pgadmin.org
       PGADMIN_DEFAULT_PASSWORD: postgres
       PGADMIN_LISTEN_PORT: 5050
@@ -37,7 +37,7 @@ services:
       - nome-sua-rede
 
   dbt:
-    build: .
+    build: . # Cria o conteiner dbt a partir do projeto local.
     container_name: dbt
     volumes:
       - ./workflow:/app
@@ -50,7 +50,7 @@ services:
       - db
     tty: true
     stdin_open: true
-    command: tail -f /dev/null
+    command: tail -f /dev/null # Mantem o conteiner com o dbt rodando.
 
 volumes:
   pgadmin_root_prefs:
